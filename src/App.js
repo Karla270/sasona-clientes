@@ -22,7 +22,7 @@ function App() {
             <NavBar />
             <div className='container-body'>
               <Routes>
-                <Route path='/cart' element={<Checkout />} />
+                <Route path='/' element={<Checkout />} />
                 {/*  <Route path='/categoria/:categoriaId' element={<ItemListContainer />} />
                 <Route path='/detalle/:id' element={<ItemDetailContainer />} />
                 <Route path='/cart' element={<Checkout />} />

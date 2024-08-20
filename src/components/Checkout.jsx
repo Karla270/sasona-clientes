@@ -49,7 +49,7 @@ const Checkout = () => {
         })
             .then(async (res) => {
                 client.phone = client.phone.toString();
-                if(orderId == null) addCliente(client);
+                if (orderId == null) addCliente(client);
                 //await updateOrder(res)
                 openAlert("success", "Registro exitoso!")
             })
@@ -71,7 +71,14 @@ const Checkout = () => {
                             ...product.data().client
                         }
                     })
-                    if (lista.length == 0) openAlert("warning", "Celular no registrado")
+                    if (lista.length == 0) {
+                        openAlert("warning", "Celular no registrado");
+                        formikRef.current.setFieldValue("agency", "");
+                        formikRef.current.setFieldValue("dni", "");
+                        formikRef.current.setFieldValue("name", "");
+                        formikRef.current.setFieldValue("product", "");
+                        formikRef.current.setFieldValue("to", "");
+                    }
                     else {
                         formikRef.current.setFieldValue("agency", lista[0].agency);
                         formikRef.current.setFieldValue("dni", lista[0].dni);
@@ -108,7 +115,7 @@ const Checkout = () => {
         <div className='pt-md-5 pt-lg-0'>
             <div className="col-12 row center-content">
                 <div className="col-md-12 col-lg-6 card body animate__animated animate__backInDown m-lg-0 m-2 mb-lg-3 mt-lg-5">
-                    <Formik   innerRef={formikRef}
+                    <Formik innerRef={formikRef}
                         initialValues={{ product: "", name: "", phone: "", dni: "", to: "", agency: "" }}
                         validationSchema={checkSchema}
                         onSubmit={(values) => {
@@ -246,6 +253,7 @@ const Checkout = () => {
                 </div>
                 <div className='col-md-6 d-none d-lg-flex card body animate__animated animate__backInDown m-lg-0 m-2 mb-lg-3 mt-lg-5'>
                     <h2 className="text-center tittle-card"><u><b>LISTA DE PEDIDOS</b></u></h2>
+                    <h5 className='text-justify'>📌ENVÍOS PROVINCIA + TOMAR FOTO</h5>
                     <ItemListContainer />
                 </div>
             </div>
